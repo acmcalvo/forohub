@@ -2,8 +2,8 @@ package com.forohub.forohub.controller;
 
 
 
-import com.forohub.forohub.model.usuario.DtoAutenticacionUsuario;
-import com.forohub.forohub.model.usuario.Usuario;
+import com.forohub.forohub.domain.usuario.DtoAutenticacionUsuario;
+import com.forohub.forohub.domain.usuario.Usuario;
 import com.forohub.forohub.Infra.security.DtoJWTtoken;
 import com.forohub.forohub.Infra.security.TokenService;
 import jakarta.validation.Valid;

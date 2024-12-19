@@ -1,7 +1,7 @@
 package com.forohub.forohub.Infra.security;
 
 
-import com.forohub.forohub.model.repository.UsuarioRepository;
+import com.forohub.forohub.domain.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

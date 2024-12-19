@@ -1,7 +1,7 @@
 package com.forohub.forohub.Infra.security;
 
 
-import com.forohub.forohub.model.repository.UsuarioRepository;
+import com.forohub.forohub.domain.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

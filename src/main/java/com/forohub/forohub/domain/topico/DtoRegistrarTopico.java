@@ -1,11 +1,9 @@
-package com.forohub.forohub.model.topico;
-
+package com.forohub.forohub.domain.topico;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record DtoActualizarTopico(
-//        @NotNull
-//        Long id,
+
+public record DtoRegistrarTopico(
         @NotBlank
         String titulo,
         @NotBlank
