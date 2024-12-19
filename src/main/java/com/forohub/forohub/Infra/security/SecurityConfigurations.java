@@ -1,6 +1,5 @@
 package com.forohub.forohub.Infra.security;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,31 +19,32 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfigurations {
 
     @Autowired
-    private SecurityFilter securityFilter;
+    private SecurityFilter securityFilter; // Filtro personalizado para manejar el JWT
 
-@Bean
+    // Configuración de seguridad para las rutas y autenticación
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf(csrf -> csrf.disable())
-                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        return httpSecurity.csrf(csrf -> csrf.disable()) // Deshabilitar CSRF ya que estamos usando JWT
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Sin sesión
                 .authorizeHttpRequests((authorizeHttpRequests) ->
-                        authorizeHttpRequests.requestMatchers(HttpMethod.POST, "/login").permitAll()
-                                .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
-
-                                .anyRequest()
-                                .authenticated()
+                        authorizeHttpRequests
+                                .requestMatchers(HttpMethod.POST, "/login").permitAll() // Acceso libre para login
+                                .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll() // Swagger accesible sin token
+                                .anyRequest().authenticated() // Rutas protegidas requieren autenticación
                 )
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) // Agregar filtro JWT antes de UsernamePasswordAuthenticationFilter
                 .build();
     }
 
+    // Configuración del AuthenticationManager para el manejo de la autenticación
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    // Configuración de la codificación de contraseñas (no afecta a JWT, pero es útil para otros casos)
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

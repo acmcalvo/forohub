@@ -83,20 +83,7 @@ public class TopicoController {
 
         return ResponseEntity.ok(new DtoListarTopicos(topico)); // Return the updated topic DTO
     }
-//
-//    // Delete a topic
-//    @DeleteMapping("/{id}")
-//    @Transactional
-//    public ResponseEntity<Void> eliminarTopico(@PathVariable Long id) {
-//        // Check if the topic exists
-//        Optional<Topico> topicoOptional = topicoRepository.findById(id);
-//        if (topicoOptional.isEmpty()) {
-//            return ResponseEntity.notFound().build(); // Return 404 if not found
-//        }
-//
-//        topicoRepository.delete(topicoOptional.get()); // Delete the topic
-//        return ResponseEntity.noContent().build(); // Return 204 No Content
-//    }
+
 
     @DeleteMapping("/{id}")
     @Transactional
